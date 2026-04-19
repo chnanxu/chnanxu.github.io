@@ -7,14 +7,5 @@ export default defineConfig({
   integrations: [sitemap()],
   build: {
     inlineStylesheets: 'auto'
-  },
-  vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@use "@/styles/variables" as *;`
-        }
-      }
-    }
   }
 });

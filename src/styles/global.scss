@@ -37,7 +37,12 @@ body {
   color: var(--text);
   line-height: var(--leading-relaxed);
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: var(--text);
     font-weight: 600;
     line-height: var(--leading-tight);
@@ -45,12 +50,29 @@ body {
     margin-bottom: var(--space-4);
   }
 
-  h1 { font-size: var(--font-4xl); }
-  h2 { font-size: var(--font-3xl); }
-  h3 { font-size: var(--font-2xl); }
-  h4 { font-size: var(--font-xl); }
-  h5 { font-size: var(--font-lg); }
-  h6 { font-size: var(--font-base); }
+  h1 {
+    font-size: var(--font-4xl);
+  }
+
+  h2 {
+    font-size: var(--font-3xl);
+  }
+
+  h3 {
+    font-size: var(--font-2xl);
+  }
+
+  h4 {
+    font-size: var(--font-xl);
+  }
+
+  h5 {
+    font-size: var(--font-lg);
+  }
+
+  h6 {
+    font-size: var(--font-base);
+  }
 
   p {
     margin-bottom: var(--space-4);
@@ -106,7 +128,8 @@ body {
     font-style: italic;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding-left: var(--space-6);
     margin-bottom: var(--space-4);
 
@@ -133,7 +156,8 @@ body {
     border-collapse: collapse;
     margin: var(--space-6) 0;
 
-    th, td {
+    th,
+    td {
       border: 1px solid var(--border);
       padding: var(--space-3);
       text-align: left;
