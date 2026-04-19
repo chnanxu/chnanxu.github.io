@@ -1,0 +1,48 @@
+---
+import PostLayout from '../layouts/PostLayout.astro';
+---
+
+<PostLayout title="关于" description="关于我">
+  <div class="container">
+    <article class="about prose">
+      <h1>关于我</h1>
+      
+      <p>
+        你好，我是 chnanxu，一名热爱技术的开发者。
+      </p>
+      
+      <h2>关于本站</h2>
+      <p>
+        这是我的个人博客，用来记录学习和思考。主要内容包括：
+      </p>
+      <ul>
+        <li>前端开发（React、Vue、Next.js 等）</li>
+        <li>UI/UX 设计</li>
+        <li>编程心得与工具分享</li>
+        <li>偶尔的生活随笔</li>
+      </ul>
+      
+      <h2>联系方式</h2>
+      <p>
+        你可以通过以下方式找到我：
+      </p>
+      <ul>
+        <li><a href="https://github.com/chnanxu" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+      
+      <hr />
+      
+      <p>
+        <em>本站使用 <a href="https://astro.build" target="_blank" rel="noopener">Astro</a> 构建，部署在 GitHub Pages。</em>
+      </p>
+    </article>
+  </div>
+</PostLayout>
+
+<style>
+  .about {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: var(--space-8) 0;
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">
+        © {currentYear} chnanxu. All rights reserved.
+      </p>
+      <div class="footer-links">
+        <a href="https://github.com/chnanxu" target="_blank" rel="noopener noreferrer" class="footer-link">
+          GitHub
+        </a>
+        <span class="divider">·</span>
+        <a href="/rss.xml" class="footer-link">
+          RSS
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: var(--space-6) 0;
+    margin-top: auto;
+  }
+  
+  .footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  
+  .copyright {
+    font-size: var(--font-sm);
+    color: var(--text-tertiary);
+  }
+  
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  
+  .footer-link {
+    font-size: var(--font-sm);
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    
+    &:hover {
+      color: var(--text-secondary);
+    }
+  }
+  
+  .divider {
+    color: var(--text-tertiary);
+  }
+</style>

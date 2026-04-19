@@ -1,0 +1,115 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+const { Content } = await post.render();
+
+const formattedDate = post.data.pubDate.toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<PostLayout title={post.data.title} description={post.data.description}>
+  <article class="post container">
+    <header class="post-header">
+      <h1 class="post-title">{post.data.title}</h1>
+      <div class="post-meta">
+        <time datetime={post.data.pubDate.toISOString()} class="post-date">
+          {formattedDate}
+        </time>
+        {post.data.tags.length > 0 && (
+          <div class="post-tags">
+            {post.data.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+    
+    <div class="post-body prose">
+      <Content />
+    </div>
+    
+    <footer class="post-footer">
+      <a href="/posts" class="back-link">← 返回文章列表</a>
+    </footer>
+  </article>
+</PostLayout>
+
+<style>
+  .post {
+    max-width: var(--content-width);
+    margin: 0 auto;
+  }
+  
+  .post-header {
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .post-title {
+    font-size: var(--font-3xl);
+    font-weight: 700;
+    color: var(--text);
+    line-height: var(--leading-tight);
+    margin-bottom: var(--space-4);
+  }
+  
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+  
+  .post-date {
+    font-size: var(--font-sm);
+    color: var(--text-tertiary);
+  }
+  
+  .post-tags {
+    display: flex;
+    gap: var(--space-2);
+  }
+  
+  .tag {
+    font-size: var(--font-xs);
+    color: var(--primary);
+    background: var(--primary-soft);
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--radius-full);
+  }
+  
+  .post-body {
+    margin-bottom: var(--space-12);
+  }
+  
+  .post-footer {
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border);
+  }
+  
+  .back-link {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    
+    &:hover {
+      color: var(--primary);
+    }
+  }
+</style>

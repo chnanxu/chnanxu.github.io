@@ -1,0 +1,109 @@
+---
+import PostLayout from '../layouts/PostLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<PostLayout title="首页" description="chnanxu 的个人博客">
+  <div class="container">
+    <section class="hero">
+      <h1 class="hero-title">你好，我是 chnanxu 👋</h1>
+      <p class="hero-description">
+        这是一个记录技术学习和思考的地方。<br />
+        我会在这里分享前端开发、产品设计、编程心得等内容。
+      </p>
+    </section>
+    
+    <section class="recent-posts">
+      <div class="section-header">
+        <h2 class="section-title">最新文章</h2>
+        <a href="/posts" class="view-all">查看全部 →</a>
+      </div>
+      
+      {posts.length > 0 ? (
+        <div class="posts-grid">
+          {posts.slice(0, 6).map((post) => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              slug={post.slug}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <p>还没有文章，敬请期待...</p>
+        </div>
+      )}
+    </section>
+  </div>
+</PostLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: var(--space-16) 0;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .hero-title {
+    font-size: var(--font-4xl);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: var(--space-4);
+    line-height: var(--leading-tight);
+  }
+  
+  .hero-description {
+    font-size: var(--font-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+  
+  .recent-posts {
+    padding: var(--space-8) 0;
+  }
+  
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+  }
+  
+  .section-title {
+    font-size: var(--font-2xl);
+    font-weight: 600;
+    color: var(--text);
+  }
+  
+  .view-all {
+    font-size: var(--font-sm);
+    color: var(--primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    
+    &:hover {
+      color: var(--primary-hover);
+    }
+  }
+  
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: var(--space-12) 0;
+    color: var(--text-tertiary);
+  }
+</style>
